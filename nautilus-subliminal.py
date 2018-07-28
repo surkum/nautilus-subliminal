@@ -8,6 +8,9 @@ import os
 import threading
 
 from babelfish import Language
+
+import gi
+gi.require_version('Nautilus', '3.0')
 from gi.repository import GObject, Gtk, Nautilus
 from subliminal import (VIDEO_EXTENSIONS, AsyncProviderPool, __copyright__, __version__, check_video, compute_score,
                         get_scores, provider_manager, refine, refiner_manager, region, save_subtitles, scan_video,
