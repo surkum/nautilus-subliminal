@@ -132,12 +132,17 @@ class ConfigHandler(object):
 
 class SubliminalExtension(GObject.GObject, Nautilus.MenuProvider):
     def __init__(self):
-        # create app directory
+        # create cache and config directories
         try:
             os.makedirs(dirs.user_cache_dir)
+        except OSError as e:
+            if not os.path.isdir(dirs.user_cache_dir):
+                raise
+
+        try:
             os.makedirs(dirs.user_config_dir)
-        except OSError:
-            if not os.path.isdir(dirs.user_cache_dir) or not os.path.isdir(dirs.user_config_dir):
+        except OSError as e:
+            if not os.path.isdir(dirs.user_config_dir):
                 raise
 
         # open config file
